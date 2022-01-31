@@ -1,0 +1,36 @@
+#!/bin/bash
+
+if [[ -z $1 ]]; then
+    echo "No subcommand found"
+    exit 1
+fi
+
+SUB_COMMAND="$1"
+
+CWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+function _help() {
+  echo "Usage:"
+  echo
+  echo "    clab <command> {arguments}"
+  echo
+  echo "Commands:"
+  echo
+  echo "    sync: sync code to remote host"
+  echo "    ssh:  ssh to remote host"
+  echo
+}
+
+
+if [ "${SUB_COMMAND}" == "help" ]; then
+  _help "$@"
+elif [ "${SUB_COMMAND}" == "sync" ]; then
+  source "${CWD}"/clab_rsync.sh
+  watch_files_and_sync
+elif [ "${SUB_COMMAND}" == "ssh" ]; then
+  ssh -p 22 -t "${REMOTE_USER}"@"$REMOTE_HOST" "(tmux attach || tmux new)"
+else
+  echo "Unknown subcommand: ${SUB_COMMAND}"
+  echo
+  _help "$@"
+fi
