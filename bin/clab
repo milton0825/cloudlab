@@ -9,6 +9,29 @@ SUB_COMMAND="$1"
 
 CWD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+source "${CWD}"/../.env
+
+# TODO: Support multiple repos
+if [[ -z ${REPO_PATH} ]]; then
+  echo "REPO_PATH not set"
+  exit 1
+fi
+
+if [[ -z ${REMOTE_USER} ]]; then
+  echo "REMOTE_USER not set"
+  exit 1
+fi
+
+if [[ -z ${REMOTE_HOST} ]]; then
+  echo "REMOTE_HOST not set"
+  exit 1
+fi
+
+if [[ -z ${REMOTE_BASE_PATH} ]]; then
+  echo "REMOTE_BASE_PATH not set"
+  exit 1
+fi
+
 function _help() {
   echo "Usage:"
   echo

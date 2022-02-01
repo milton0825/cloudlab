@@ -8,29 +8,6 @@ which -s fswatch || (
   brew install fswatch || error "This script requires fswatch to be installed."
 )
 
-source "${CWD}/../.env"
-
-# TODO: Support multiple repos
-if [[ -z ${REPO_PATH} ]]; then
-  echo "REPO_PATH not set"
-  exit 1
-fi
-
-if [[ -z ${REMOTE_USER} ]]; then
-  echo "REMOTE_USER not set"
-  exit 1
-fi
-
-if [[ -z ${REMOTE_HOST} ]]; then
-  echo "REMOTE_HOST not set"
-  exit 1
-fi
-
-if [[ -z ${REMOTE_BASE_PATH} ]]; then
-  echo "REMOTE_BASE_PATH not set"
-  exit 1
-fi
-
 function _sync() {
   args=(
     -rzpv
@@ -39,6 +16,8 @@ function _sync() {
     --exclude='venv'
     --exclude='.idea'
     --exclude='.env'
+    --exclude='.DS_Store'
+    --exclude='.so'
   )
 
   rsync "${args[@]}" "$REPO_PATH" "${REMOTE_USER}"@"${REMOTE_HOST}":"${REMOTE_BASE_PATH}"
@@ -53,6 +32,7 @@ function watch_files_and_sync() {
             done
             file_list=()
         else
+          echo "files changed $file"
             file_list+=("$file")
         fi
   done
