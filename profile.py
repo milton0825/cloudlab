@@ -16,10 +16,11 @@ node = request.RawPC("node")
 iface = node.addInterface()
 
 # The remote file system is represented by special node.
-fsnode = request.RemoteBlockstore("fsnode", "/mydata")
+#fsnode = request.RemoteBlockstore("fsnode", "/mydata")
 
 # This URN is displayed in the web interfaace for your dataset.
-fsnode.dataset = "urn:publicid:IDN+utah.cloudlab.us:rstorage-pg0+ltdataset+ctsai"
+#fsnode.dataset = "urn:publicid:IDN+utah.cloudlab.us:rstorage-pg0+ltdataset+ctsai"
+#fsnode.readonly = False
 
 # Now we add the link between the node and the special node
 fslink = request.Link("fslink")
