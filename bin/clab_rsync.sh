@@ -12,7 +12,7 @@ function _sync() {
   args=(
     -rzpv
     --delete
-    --exclude='.git'
+#    --exclude='.git'
     --exclude='venv'
     --exclude='.idea'
     --exclude='.env'

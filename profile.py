@@ -32,7 +32,7 @@ node = request.RawPC("node")
 #fslink.vlan_tagging = True
 
 # Install and execute a script that is contained in the repository.
-node.addService(pg.Execute(shell="sh", command="/local/repository/setup.sh"))
+#node.addService(pg.Execute(shell="sh", command="/local/repository/setup.sh"))
 
 # Print the RSpec to the enclosing page.
 pc.printRequestRSpec(request)
