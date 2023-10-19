@@ -1,6 +1,10 @@
 #!/bin/bash
 
-sudo apt --assume-yes update
-sudo apt --assume-yes upgrade
-yes '' | sudo add-apt-repository -y ppa:longsleep/golang-backports
-sudo apt --assume-yes install golang-go tmux git
+sudo apt-get -y update
+sudo apt-get -y upgrade
+sudo apt-get -y install tmux
+
+# Install Docker
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh ./get-docker.sh --dry-run
+
